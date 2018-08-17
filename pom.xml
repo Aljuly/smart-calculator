@@ -5,11 +5,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ua.com.foxminded.integer-division</groupId>
-  <artifactId>integer-division</artifactId>
+  <groupId>ua.com.foxminded.smart-calculator</groupId>
+  <artifactId>smart-calculator</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>integer-division</name>
+  <name>smart-calculator</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -20,6 +20,13 @@
   </properties>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.4</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
