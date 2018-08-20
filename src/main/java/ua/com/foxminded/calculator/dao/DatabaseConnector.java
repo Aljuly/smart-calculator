@@ -12,9 +12,11 @@ public class DatabaseConnector {
 
     public static Connection createConnection() {
         String dbUrl = "jdbc:postgresql://localhost:5432/calculator";
+        String user = "calcuser";
+        String password = "1";
         Properties props = new Properties();
-        props.setProperty("user","calcuser");
-        props.setProperty("password","1");
+        props.setProperty("user", user);
+        props.setProperty("password", password);
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(dbUrl, props);
