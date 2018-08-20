@@ -8,6 +8,7 @@ CREATE USER calcuser WITH PASSWORD '1';
 CREATE DATABASE calculator OWNER calcuser;
 GRANT ALL PRIVILEGES ON DATABASE "calculator" TO calcuser;
 
+
 BEGIN;
 DROP SCHEMA calculator CASCADE;
 

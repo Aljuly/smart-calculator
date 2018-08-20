@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class UserDaoImpl implements UserDao {
 
-    private final Connection conn = DatabaseConnector.createConnection();
+    private final Connection connection = DatabaseConnector.createConnection();
     private static final String CREATE_USER = "INSERT INTO user (name, hash, login, email, date) VALUES (?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id=?";
     private static final String GET_USERS = "SELECT * FROM users";
@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void createUser(User user) {
-        try (PreparedStatement statement = conn.prepareStatement(CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getHash());
             statement.setString(3, user.getLogin());
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserById(int id) {
         User user = new User();
-        try (PreparedStatement statement = conn.prepareStatement(GET_USER_BY_ID)) {
+        try (PreparedStatement statement = connection.prepareStatement(GET_USER_BY_ID)) {
             statement.setInt(1, id);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
-        try (PreparedStatement statement = conn.prepareStatement(GET_USERS);
+        try (PreparedStatement statement = connection.prepareStatement(GET_USERS);
              ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 User user = new User();
@@ -84,14 +84,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        try (PreparedStatement statement = conn.prepareStatement(UPDATE_USER)) {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getHash());
             statement.setString(3, user.getLogin());
             statement.setString(4, user.getEmail());
             statement.setDate(5, user.getCreatedDate());
             statement.executeUpdate();
-            conn.commit();
+            connection.commit();
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,10 +99,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(int id) {
-        try (PreparedStatement statement = conn.prepareStatement(DELETE_USER)) {
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_USER)) {
             statement.setInt(1, id);
             statement.executeUpdate();
-            conn.commit();
+            connection.commit();
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
