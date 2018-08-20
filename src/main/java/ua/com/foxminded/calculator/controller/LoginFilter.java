@@ -3,7 +3,10 @@ package ua.com.foxminded.calculator.controller;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebFilter()
@@ -25,6 +28,26 @@ public class LoginFilter implements Filter {
     public void doFilter(final ServletRequest servletRequest,
                          final ServletResponse servletResponse,
                          final FilterChain filterChain) throws IOException, ServletException {
+        
+        HttpServletRequest httpRequest = (HttpServletRequest) servletRequest; 
+        
+       // boolean loggedIn = false;
+        try {
+            String jwt = getBearerToken(httpRequest);
+            if (jwt != null && !jwt.isEmpty()) {
+                httpRequest.login(jwt, "");
+                //loggedIn = true;
+                LOG.info("Logged in using JWT");
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                LOG.info("No JWT provided, go on unauthenticated");
+            }
+        } catch (final Exception e) {
+            LOG.log(Level.WARNING, "Failed logging in with security token", e);
+            HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+            httpResponse.setContentLength(0);
+            httpResponse.setStatus(STATUS_CODE_UNAUTHORIZED);
+        }
 
     }
 
