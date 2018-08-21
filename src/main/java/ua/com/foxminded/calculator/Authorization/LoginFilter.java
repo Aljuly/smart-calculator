@@ -1,4 +1,4 @@
-package ua.com.foxminded.calculator.controller;
+package ua.com.foxminded.calculator.Authorization;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
