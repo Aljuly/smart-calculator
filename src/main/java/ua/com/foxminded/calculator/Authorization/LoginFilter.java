@@ -60,10 +60,10 @@ public class LoginFilter implements Filter {
      * Get the bearer token from the HTTP request.
      * The token is in the HTTP request "Authorization" header in the form of: "Bearer [token]"
      */
-    private String getBearerToken( HttpServletRequest request ) {
-        String authHeader = request.getHeader( AUTH_HEADER_KEY );
-        if ( authHeader != null && authHeader.startsWith( AUTH_HEADER_VALUE_PREFIX ) ) {
-            return authHeader.substring( AUTH_HEADER_VALUE_PREFIX.length() );
+    private String getBearerToken(HttpServletRequest request) {
+        String authHeader = request.getHeader(AUTH_HEADER_KEY);
+        if (authHeader != null && authHeader.startsWith(AUTH_HEADER_VALUE_PREFIX)) {
+            return authHeader.substring(AUTH_HEADER_VALUE_PREFIX.length());
         }
         return null;
     }

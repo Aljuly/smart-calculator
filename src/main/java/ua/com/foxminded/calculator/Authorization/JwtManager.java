@@ -25,12 +25,12 @@ public class JwtManager {
      */
     public String createToken(final String subject, final String role) {
         final Instant now = Instant.now();
-        final Date expiryDate = Date.from( now.plus( TOKEN_VALIDITY ) );
+        final Date expiryDate = Date.from( now.plus(TOKEN_VALIDITY));
         return Jwts.builder()
                 .setSubject(subject)
                 .claim(CLAIM_ROLE, role)
                 .setExpiration(expiryDate)
-                .setIssuedAt(Date.from( now ))
+                .setIssuedAt(Date.from(now))
                 .signWith(SECRET_KEY)
                 .compact();
     }
