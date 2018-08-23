@@ -2,7 +2,7 @@ package ua.com.foxminded.calculator.service;
 
 import org.mindrot.jbcrypt.BCrypt;
 import ua.com.foxminded.calculator.dao.UserDao;
-import ua.com.foxminded.calculator.dto.UserDto;
+import ua.com.foxminded.calculator.dto.RegisterRequest;
 import ua.com.foxminded.calculator.model.User;
 
 public class UserService {
@@ -13,10 +13,10 @@ public class UserService {
         this.userDao = new UserDao();
     }
 
-    public User create(UserDto userDto) throws Exception {
+    public User create(RegisterRequest userDto) throws AuthenticationException {
         // Validate user
         if (userDao.getUserByName(userDto.getUserName()) != null) {
-            throw new Exception("User " + userDto.getUserName() + "  already registered!");
+            throw new AuthenticationException("User " + userDto.getUserName() + "  already registered!");
         }
         User user = new User(userDto);
         // Hash password
@@ -32,5 +32,4 @@ public class UserService {
         }
         throw new AuthenticationException("Failed logging in user: " + name + ". Unknown name or wrong password!");
     }
-
 }

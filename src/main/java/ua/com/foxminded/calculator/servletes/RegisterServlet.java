@@ -2,8 +2,8 @@ package ua.com.foxminded.calculator.servletes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ua.com.foxminded.calculator.Authorization.JwtManager;
-import ua.com.foxminded.calculator.dto.LoginRequest;
 import ua.com.foxminded.calculator.dto.LoginResponse;
+import ua.com.foxminded.calculator.dto.RegisterRequest;
 import ua.com.foxminded.calculator.model.User;
 import ua.com.foxminded.calculator.service.AuthenticationException;
 import ua.com.foxminded.calculator.service.UserService;
@@ -17,9 +17,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = "/users/authenticate")
-public class LoginServlet extends HttpServlet {
-
+@WebServlet(urlPatterns = "/users/register")
+public class RegisterServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
 
     @Override
@@ -33,10 +32,10 @@ public class LoginServlet extends HttpServlet {
         String json = reader.readLine();
         // Initialize JSON Mapper
         ObjectMapper mapper = new ObjectMapper();
-        LoginRequest loginRequest = mapper.readValue(json, LoginRequest.class);
+        RegisterRequest registerRequest = mapper.readValue(json, RegisterRequest.class);
         try {
-            // Let's try to authenticate this user!
-            User user = userService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
+            // Let's try to register new user!
+            User user = userService.create(registerRequest);
             // Create token for the authenticated User
             String jwt = jwtManager.createToken(user.getUserName(), "role");
             LoginResponse loginResponse = new LoginResponse(user.getUserName(), "role", jwt);

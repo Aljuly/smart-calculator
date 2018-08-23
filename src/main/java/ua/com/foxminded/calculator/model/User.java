@@ -8,7 +8,7 @@ package ua.com.foxminded.calculator.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ua.com.foxminded.calculator.dto.UserDto;
+import ua.com.foxminded.calculator.dto.RegisterRequest;
 
 import java.sql.Date;
 
@@ -28,7 +28,7 @@ public class User {
     private String email;
     private Date createdDate;
 
-    public User(UserDto userDto) {
+    public User(RegisterRequest userDto) {
         this.userName = userDto.getUserName();
         this.login = userDto.getLogin();
         this.email = userDto.getEmail();
