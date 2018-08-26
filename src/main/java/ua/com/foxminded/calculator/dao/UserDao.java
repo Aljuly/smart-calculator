@@ -58,7 +58,7 @@ public class UserDao {
                         user.setHash(rs.getString(3));
                         user.setLogin(rs.getString(4));
                         user.setEmail(rs.getString(5));
-                        user.setCreatedDate(rs.getDate(5));
+                        user.setCreatedDate(rs.getDate(6));
                     }
                 }
             }
@@ -82,7 +82,7 @@ public class UserDao {
                         user.setHash(rs.getString(3));
                         user.setLogin(rs.getString(4));
                         user.setEmail(rs.getString(5));
-                        user.setCreatedDate(rs.getDate(5));
+                        user.setCreatedDate(rs.getDate(6));
                     }
                 }
             }
@@ -103,7 +103,7 @@ public class UserDao {
                 user.setHash(rs.getString(3));
                 user.setLogin(rs.getString(4));
                 user.setEmail(rs.getString(5));
-                user.setCreatedDate(rs.getDate(5));
+                user.setCreatedDate(rs.getDate(6));
                 allUsers.add(user);
             }
         } catch (SQLException ex) {
