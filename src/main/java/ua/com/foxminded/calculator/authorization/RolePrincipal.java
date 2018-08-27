@@ -1,13 +1,13 @@
-package ua.com.foxminded.calculator.Authorization;
+package ua.com.foxminded.calculator.authorization;
 
 import java.security.Principal;
 
 /**
- * Holds the logged in users name
+ * Holds a single role name that the user is in
  *
  * @author sixthpoint
  */
-public class UserPrincipal implements Principal {
+public class RolePrincipal implements Principal {
 
     private String name;
 
@@ -16,13 +16,13 @@ public class UserPrincipal implements Principal {
      *
      * @param name
      */
-    public UserPrincipal(String name) {
+    public RolePrincipal(String name) {
         super();
         this.name = name;
     }
 
     /**
-     * Set the name of the user
+     * Set the role name
      *
      * @param name
      */
@@ -31,7 +31,7 @@ public class UserPrincipal implements Principal {
     }
 
     /**
-     * Get the name of the user
+     * Get the role name
      *
      * @return
      */

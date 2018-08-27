@@ -1,4 +1,4 @@
-package ua.com.foxminded.calculator.Authorization;
+package ua.com.foxminded.calculator.authorization;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

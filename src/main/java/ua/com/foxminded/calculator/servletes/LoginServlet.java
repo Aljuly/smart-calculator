@@ -1,7 +1,7 @@
 package ua.com.foxminded.calculator.servletes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ua.com.foxminded.calculator.Authorization.JwtManager;
+import ua.com.foxminded.calculator.authorization.JwtManager;
 import ua.com.foxminded.calculator.dto.LoginRequest;
 import ua.com.foxminded.calculator.dto.LoginResponse;
 import ua.com.foxminded.calculator.model.User;
