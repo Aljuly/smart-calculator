@@ -18,7 +18,7 @@ import java.sql.Date;
  * Class representing newly registered User
  *
  * @author Alexander Zhulinsky
- * @version 1.0 06 Jun 2018
+ * @version 1.0 27 Aug 2018
  */
 @Data
 @NoArgsConstructor

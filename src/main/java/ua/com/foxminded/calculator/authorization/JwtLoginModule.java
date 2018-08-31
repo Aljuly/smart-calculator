@@ -61,7 +61,6 @@ public class JwtLoginModule implements LoginModule {
         this.callbackHandler = callbackHandler;
     }
 
-
     /**
      * Login method
      * @return @throws LoginException
