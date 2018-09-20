@@ -5,11 +5,14 @@ import ua.com.foxminded.calculator.dao.UserDao;
 import ua.com.foxminded.calculator.dto.RegisterRequest;
 import ua.com.foxminded.calculator.model.User;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
+
 public class UserService {
 
     private UserDao userDao;
 
-    public UserService() {
+    public UserService() throws SQLException, NamingException {
         this.userDao = new UserDao();
     }
 

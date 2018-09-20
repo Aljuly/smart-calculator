@@ -2,6 +2,7 @@ package ua.com.foxminded.calculator.dao;
 
 import ua.com.foxminded.calculator.model.User;
 
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ public class UserDao {
     private static final String UPDATE_USER = "UPDATE users SET name=?, hash=?, login=?, email=?, date=? WHERE user_id=?";
     private static final String DELETE_USER = "DELETE FROM users WHERE user_id=?";
 
-    public UserDao() {
+    public UserDao() throws SQLException, NamingException {
         this.connection = DatabaseConnector.createConnection();
     }
 

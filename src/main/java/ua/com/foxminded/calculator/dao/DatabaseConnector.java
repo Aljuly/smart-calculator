@@ -1,16 +1,15 @@
 package ua.com.foxminded.calculator.dao;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class DatabaseConnector {
 
-    public static Connection createConnection() {
+    public static Connection createConnection() throws NamingException, SQLException {
+        /*
         String dbUrl = "jdbc:postgresql://localhost:5432/calculator";
         String user = "calcuser";
         String password = "1";
@@ -23,7 +22,11 @@ public class DatabaseConnector {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return conn;
+        */
+        InitialContext context = new InitialContext();
+        DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/postgres");
+        Connection connection = dataSource.getConnection();
+        return connection;
     }
 
 }

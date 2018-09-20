@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import ua.com.foxminded.calculator.dao.DatabaseConnector;
 
+import javax.naming.NamingException;
+
 /**
  * Class for testing DsatsabsasaeConnector class
  *
@@ -26,7 +28,7 @@ public class DsatsabsasaeConnectorTest {
     private Connection connection;
     
     @Test
-    public void shouldReturnDatabaseConnection() throws SQLException {
+    public void shouldReturnDatabaseConnection() throws SQLException, NamingException {
         connection = DatabaseConnector.createConnection();
         assertNotNull(connection);
         connection.close();

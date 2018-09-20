@@ -9,11 +9,13 @@ import java.util.logging.Logger;
 
 import ua.com.foxminded.calculator.model.Operation;
 
+import javax.naming.NamingException;
+
 public class OperationDao {
     private Connection connection;
     private static final String GET_DESCRIPTION_BY_ID = "SELECT * FROM operations WHERE operation_id=?";
     
-    public OperationDao() {
+    public OperationDao() throws SQLException, NamingException {
         this.connection = DatabaseConnector.createConnection();
     }
     

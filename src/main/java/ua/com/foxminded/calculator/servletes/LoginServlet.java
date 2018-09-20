@@ -8,6 +8,7 @@ import ua.com.foxminded.calculator.model.User;
 import ua.com.foxminded.calculator.service.AuthenticationException;
 import ua.com.foxminded.calculator.service.UserService;
 
+import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 @WebServlet(urlPatterns = "/users/authenticate")
@@ -25,7 +27,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Get the UserService
-        UserService userService = new UserService();
+        UserService userService = null;
+        try {
+            userService = new UserService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
         // Get the JWT Manager
         JwtManager jwtManager = new JwtManager();
         // Read the request
