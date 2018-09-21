@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = "/users/register")
+//@WebServlet(urlPatterns = "/users/register")
 public class RegisterServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
 

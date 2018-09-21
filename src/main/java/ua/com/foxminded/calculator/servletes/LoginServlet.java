@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = "/users/authenticate")
+//@WebServlet(urlPatterns = "/users/authenticate")
 public class LoginServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
