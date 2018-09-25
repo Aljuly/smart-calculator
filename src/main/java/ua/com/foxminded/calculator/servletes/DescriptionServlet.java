@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Servlet for getting additional info about selected calculation mode
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
  */
 public class DescriptionServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger logger = LogManager.getLogger(LoginServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -47,7 +48,7 @@ public class DescriptionServlet extends HttpServlet {
             // Send token to the client
             mapper.writeValue(response.getOutputStream(), descriptionResponse);
         } catch(Exception e) {
-            logger.warning(e.getMessage());
+            logger.error(e.getMessage());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
         }
     }

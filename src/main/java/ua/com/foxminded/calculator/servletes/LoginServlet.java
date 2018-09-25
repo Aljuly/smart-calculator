@@ -1,3 +1,9 @@
+/*
+ * Alexander Zhulinsky
+ *
+ * Copyright (c) 2018 by MySelf corp
+ *
+ */
 package ua.com.foxminded.calculator.servletes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,12 +23,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+/**
+ * Servlet for providing user login
+ *
+ * @author Alexander Zhulinsky
+ * @version 1.0 27 Aug 2018
+ */
 //@WebServlet(urlPatterns = "/users/authenticate")
 public class LoginServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger logger = LogManager.getLogger(LoginServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -53,8 +66,9 @@ public class LoginServlet extends HttpServlet {
             response.setContentType("application/json");
             // Send token to the client
             mapper.writeValue(response.getOutputStream(), loginResponse);
+            logger.info(loginRequest.getUsername() + " is logged in " );
         } catch (AuthenticationException e) {
-            logger.warning(e.getMessage());
+            logger.error(e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
         }
     }

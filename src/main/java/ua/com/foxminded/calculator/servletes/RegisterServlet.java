@@ -1,6 +1,5 @@
 package ua.com.foxminded.calculator.servletes;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ua.com.foxminded.calculator.authorization.JwtManager;
 import ua.com.foxminded.calculator.dto.LoginResponse;
 import ua.com.foxminded.calculator.dto.RegisterRequest;
@@ -17,11 +16,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.logging.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //@WebServlet(urlPatterns = "/users/register")
 public class RegisterServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final long serialVersionUID = 1L;
+    private static final Logger logger = LogManager.getLogger(RegisterServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -52,8 +55,9 @@ public class RegisterServlet extends HttpServlet {
             response.setContentType("application/json");
             // Send token to the client
             mapper.writeValue(response.getOutputStream(), loginResponse);
+            logger.info(registerRequest.getUserName() + " Registered successful");
         } catch (AuthenticationException e) {
-            logger.warning(e.getMessage());
+            logger.error(e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
         }
     }
