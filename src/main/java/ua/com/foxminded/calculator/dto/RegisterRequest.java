@@ -7,12 +7,9 @@
 package ua.com.foxminded.calculator.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Date;
 
 /**
  * Class representing newly registered User
@@ -28,19 +25,15 @@ public class RegisterRequest {
     private String password;
     private String login;
     private String email;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
-    private Date createdDate;
 
     @JsonCreator
-    public RegisterRequest(@JsonProperty("username") String userName,
+    public RegisterRequest(@JsonProperty("name") String userName,
                    @JsonProperty("password") String password,
                    @JsonProperty("login") String login,
-                   @JsonProperty("email") String email,
-                   @JsonProperty("date") Date createdDate) {
+                   @JsonProperty("email") String email) {
         this.userName = userName;
         this.password = password;
         this.login = login;
         this.email = email;
-        this.createdDate = createdDate;
     }
 }

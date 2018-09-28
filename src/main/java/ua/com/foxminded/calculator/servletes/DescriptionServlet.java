@@ -26,7 +26,8 @@ import org.apache.logging.log4j.Logger;
  */
 public class DescriptionServlet extends HttpServlet {
 
-    private static final Logger logger = LogManager.getLogger(LoginServlet.class.getName());
+	private static final long serialVersionUID = 1L;
+	private static final Logger logger = LogManager.getLogger(DescriptionServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

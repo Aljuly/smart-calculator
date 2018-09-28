@@ -8,7 +8,6 @@ import ua.com.foxminded.calculator.service.AuthenticationException;
 import ua.com.foxminded.calculator.service.UserService;
 
 import javax.naming.NamingException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,20 +32,28 @@ public class RegisterServlet extends HttpServlet {
         try {
             userService = new UserService();
         } catch (SQLException e) {
-            e.printStackTrace();
+        	logger.error(e.getMessage());
         } catch (NamingException e) {
-            e.printStackTrace();
+        	logger.error(e.getMessage());
         }
         // Get the JWT Manager
         JwtManager jwtManager = new JwtManager();
         // Read the request
         BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        String json = reader.readLine();
+        // Read JSON from request
+        StringBuilder json = new StringBuilder();
+        int cp;
+        while ((cp = reader.read()) != -1) {
+          json.append((char) cp);
+        }
         // Initialize JSON Mapper
         ObjectMapper mapper = new ObjectMapper();
-        RegisterRequest registerRequest = mapper.readValue(json, RegisterRequest.class);
+        RegisterRequest registerRequest = mapper.readValue(json.toString(), RegisterRequest.class);
         try {
             // Let's try to register new user!
+        	if (userService == null) {
+        		throw new AuthenticationException("Cant establish corresponding service");
+        	}
             User user = userService.create(registerRequest);
             // Create token for the authenticated User
             String jwt = jwtManager.createToken(user.getUserName(), "role");

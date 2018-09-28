@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import ua.com.foxminded.calculator.dto.RegisterRequest;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  * Class for storing information about particular user
@@ -32,6 +33,7 @@ public class User {
         this.userName = userDto.getUserName();
         this.login = userDto.getLogin();
         this.email = userDto.getEmail();
-        this.createdDate = userDto.getCreatedDate();
+        // get current date from the system clock
+        this.createdDate = java.sql.Date.valueOf(LocalDateTime.now().toLocalDate());
     }
 }
