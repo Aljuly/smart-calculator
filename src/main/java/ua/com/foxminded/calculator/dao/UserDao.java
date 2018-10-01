@@ -60,14 +60,13 @@ public class UserDao {
                 if (!rs.next()) {
                     return null;
                 } else {
-                    while (rs.next()) {
-                        user.setId(rs.getInt(1));
-                        user.setUserName(rs.getString(2));
-                        user.setHash(rs.getString(3));
-                        user.setLogin(rs.getString(4));
-                        user.setEmail(rs.getString(5));
-                        user.setCreatedDate(rs.getDate(6));
-                    }
+                    rs.first();
+                    user.setId(rs.getInt(1));
+                    user.setUserName(rs.getString(2));
+                    user.setHash(rs.getString(3));
+                    user.setLogin(rs.getString(4));
+                    user.setEmail(rs.getString(5));
+                    user.setCreatedDate(rs.getDate(6));
                 }
             }
         } catch (SQLException ex) {
@@ -86,14 +85,13 @@ public class UserDao {
                 if (!rs.next()) {
                     return null;
                 } else {
-                    while (rs.next()) {
-                        user.setId(rs.getInt(1));
-                        user.setUserName(rs.getString(2));
-                        user.setHash(rs.getString(3));
-                        user.setLogin(rs.getString(4));
-                        user.setEmail(rs.getString(5));
-                        user.setCreatedDate(rs.getDate(6));
-                    }
+                    rs.first();
+                    user.setId(rs.getInt(1));
+                    user.setUserName(rs.getString(2));
+                    user.setHash(rs.getString(3));
+                    user.setLogin(rs.getString(4));
+                    user.setEmail(rs.getString(5));
+                    user.setCreatedDate(rs.getDate(6));
                 }
             }
         } catch (SQLException ex) {

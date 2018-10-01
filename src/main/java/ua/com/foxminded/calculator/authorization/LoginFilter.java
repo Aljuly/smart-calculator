@@ -31,12 +31,10 @@ public class LoginFilter implements Filter {
         
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest; 
         
-       // boolean loggedIn = false;
         try {
             String jwt = getBearerToken(httpRequest);
             if (jwt != null && !jwt.isEmpty()) {
                 httpRequest.login(jwt, "");
-                //loggedIn = true;
                 LOG.info("Logged in using JWT");
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {

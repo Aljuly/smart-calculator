@@ -15,7 +15,6 @@ import ua.com.foxminded.calculator.service.AuthenticationException;
 import ua.com.foxminded.calculator.service.UserService;
 
 import javax.naming.NamingException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,10 +31,10 @@ import org.apache.logging.log4j.Logger;
  * @author Alexander Zhulinsky
  * @version 1.0 27 Aug 2018
  */
-//@WebServlet(urlPatterns = "/users/authenticate")
 public class LoginServlet extends HttpServlet {
 
-    private static final Logger logger = LogManager.getLogger(LoginServlet.class.getName());
+	private static final long serialVersionUID = -6780052647099318507L;
+	private static final Logger logger = LogManager.getLogger(LoginServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -52,10 +51,15 @@ public class LoginServlet extends HttpServlet {
         JwtManager jwtManager = new JwtManager();
         // Read the request
         BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        String json = reader.readLine();
+        // Read JSON from request
+        StringBuilder json = new StringBuilder();
+        int cp;
+        while ((cp = reader.read()) != -1) {
+          json.append((char) cp);
+        }
         // Initialize JSON Mapper
         ObjectMapper mapper = new ObjectMapper();
-        LoginRequest loginRequest = mapper.readValue(json, LoginRequest.class);
+        LoginRequest loginRequest = mapper.readValue(json.toString(), LoginRequest.class);
         try {
             // Let's try to authenticate this user!
             User user = userService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
