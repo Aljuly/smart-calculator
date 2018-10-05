@@ -13,4 +13,5 @@ package ua.com.foxminded.calculator.calculations;
  * @version 1.0 31 Aug 2018
  */
 public class Addition {
+	
 }
