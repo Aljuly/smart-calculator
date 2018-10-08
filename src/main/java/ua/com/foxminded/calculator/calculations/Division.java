@@ -19,7 +19,7 @@ import ua.com.foxminded.calculator.dto.Step;
  * @author Alexander Zhulinsky
  * @version 1.0 12 Jun 2018
  */
-public class Division {
+public class Division implements BinaryOperation {
 
     private static final byte FRACTION_DIGITS_PERIOD_SEARCH_LIMIT = 10;
 
@@ -50,7 +50,7 @@ public class Division {
      * @param divisor - divisor
      * @return DivisionResult object
      */
-    public DivisionResult divide(String dividend, String divisor) {
+    public DivisionResult calculate(String first, String second) {
         int firstNumber;
         int secondNumber;
         int difference = 0;
@@ -58,25 +58,25 @@ public class Division {
         StringBuilder fraction = new StringBuilder();
         StringBuilder number = new StringBuilder();
         //Check whereas supplied data is a numeric
-        if (!StringUtils.isNumeric(dividend) || !StringUtils.isNumeric(divisor)) {
+        if (!StringUtils.isNumeric(first) || !StringUtils.isNumeric(second)) {
             return new DivisionResult("Dividend and Divisor should be numeric! ");
         }
         //Check whereas divisor is not zero
-        if (Integer.parseInt(divisor) == 0) {
+        if (Integer.parseInt(second) == 0) {
             return new DivisionResult("Division by zero! ");
         }
         DivisionResult result = new DivisionResult();
-        result.setDividend(dividend);
-        result.setDivisor(divisor);
+        result.setDividend(first);
+        result.setDivisor(second);
         result.setAlert("");
-        int integerDivisor = Integer.parseInt(divisor);
+        int integerDivisor = Integer.parseInt(second);
         //index of the current digit in dividend
         int i = 0;
         int j = 0;
         //Define integer part
-        while (i < dividend.length()) {
+        while (i < first.length()) {
             //carry-over digits
-            number.append(dividend.charAt(i));
+            number.append(first.charAt(i));
             //prevent putting leading zeros
             if (quotient.length() != 0) {
                 quotient.append('0');

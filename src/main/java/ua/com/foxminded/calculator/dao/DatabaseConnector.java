@@ -25,8 +25,7 @@ public class DatabaseConnector {
         */
         InitialContext context = new InitialContext();
         DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/postgres");
-        Connection connection = dataSource.getConnection();
-        return connection;
+        return dataSource.getConnection();
     }
 
 }

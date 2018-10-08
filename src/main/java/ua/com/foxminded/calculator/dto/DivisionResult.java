@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class DivisionResult {
+public class DivisionResult extends CalculationResult {
     private String dividend;
     private String divisor;
     private String quotient;
@@ -33,13 +33,16 @@ public class DivisionResult {
     private List<Step> steps = new ArrayList<>();
 
     @JsonCreator
-    public DivisionResult(@JsonProperty("dividend") String dividend,
-                          @JsonProperty("divisor") String divisor,
-                          @JsonProperty("quotient") String quotient,
-                          @JsonProperty("reminder") String reminder,
-                          @JsonProperty("alert") String alert,
-                          @JsonProperty("fraction") String fraction,
-                          @JsonProperty("calculationSteps") List<Step> steps) {
+    public DivisionResult(
+    		@JsonProperty("id") int id,
+    		@JsonProperty("dividend") String dividend,
+            @JsonProperty("divisor") String divisor,
+            @JsonProperty("quotient") String quotient,
+            @JsonProperty("reminder") String reminder,
+            @JsonProperty("alert") String alert,
+            @JsonProperty("fraction") String fraction,
+            @JsonProperty("calculationSteps") List<Step> steps) {
+    	super(id);
         this.dividend = dividend;
         this.divisor = divisor;
         this.quotient = quotient;

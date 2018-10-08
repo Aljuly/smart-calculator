@@ -6,20 +6,19 @@
  */
 package ua.com.foxminded.calculator.calculations;
 
-import ua.com.foxminded.calculator.dto.AdditionResult;
+import ua.com.foxminded.calculator.dto.SubtractionResult;
 
 /**
- * Class for making addition operation
+ * Class for making subtraction operation
  *
  * @author Alexander Zhulinsky
  * @version 1.0 31 Aug 2018
  */
-public class Addition implements BinaryOperation {
+public class Subtraction implements BinaryOperation {
 
 	@Override
-	public AdditionResult calculate(String first, String second) {
-		
+	public SubtractionResult calculate(String first, String second) {
 		return null;
 	}
-	
+
 }
