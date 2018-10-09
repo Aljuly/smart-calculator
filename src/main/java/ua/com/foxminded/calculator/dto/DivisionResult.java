@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.NoArgsConstructor;
 
 /**
  * Class for storing results of the calculations
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0 06 Jun 2018
  */
 @Data
-@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class DivisionResult extends CalculationResult {
     private String dividend;
     private String divisor;
@@ -53,6 +54,11 @@ public class DivisionResult extends CalculationResult {
     }
 
     public DivisionResult(String alert) {
+    	super(0);
         this.alert = alert;
+    }
+    
+    public DivisionResult() {
+    	super(0);
     }
 }

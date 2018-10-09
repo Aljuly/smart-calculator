@@ -21,13 +21,14 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import ua.com.foxminded.calculator.calculations.Addition;
+import ua.com.foxminded.calculator.dto.AdditionResult;
 
 class AdderTest {
 
 	@ParameterizedTest
 	@MethodSource("provideTestData")
 	public void shouldMakeAddition(String first, String second, String sum) {
-		AdditionResult additionResult = (new Addition()).add(first, second);
+		AdditionResult additionResult = (new Addition()).calculate(first, second);
 		assertNotNull(additionResult);
 		assertEquals(sum, additionResult.getSum());
 	}

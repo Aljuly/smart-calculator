@@ -44,7 +44,7 @@ public class DividerTest {
     @ParameterizedTest
     @MethodSource("provideTestData")
     void shouldMakeIntegerDivision(String dividend, String divisor, String quotient, String reminder, String pairs) {
-        DivisionResult divisionResult = (new Division(false)).divide(dividend, divisor);
+        DivisionResult divisionResult = (new Division(false)).calculate(dividend, divisor);
         assertNotNull(divisionResult);
         assertEquals(quotient, divisionResult.getQuotient());
         assertEquals(reminder, divisionResult.getReminder());
@@ -66,7 +66,7 @@ public class DividerTest {
     @MethodSource("provideTestDataForDivisionWithPeriod")
     void shouldMakeDivisionWithPeriod(String dividend, String divisor, String quotient,
             String fraction, String reminder, String pairs) {
-        DivisionResult divisionResult = (new Division(true)).divide(dividend, divisor);
+        DivisionResult divisionResult = (new Division(true)).calculate(dividend, divisor);
         assertNotNull(divisionResult);
         assertEquals(quotient, divisionResult.getQuotient());
         assertEquals(fraction, divisionResult.getFraction());

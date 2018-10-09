@@ -9,6 +9,7 @@ package ua.com.foxminded.calculator.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,6 +20,7 @@ public class AdditionResult extends CalculationResult {
 	private String secondTerm;
 	private String sum;
 	
+	@Builder
 	@JsonCreator
 	public AdditionResult(
 			@JsonProperty("id") int id,
