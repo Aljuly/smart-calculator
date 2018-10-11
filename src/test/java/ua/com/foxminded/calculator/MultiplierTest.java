@@ -38,9 +38,10 @@ class MultiplierTest {
 	static Stream<Arguments> provideTestData() {
 		return Stream.of(
 				Arguments.of("427", "36", "15372", "2562 1281"),
-				Arguments.of("7602", "18273", "25875", "252 72 144"),
+				Arguments.of("7602", "18273", "138911346", "22806 53214 15204 60816 7602"),
 				Arguments.of("0", "0", "0", "0"),
 				Arguments.of("207", "505", "104535", "1035 0 1035"),
-				Arguments.of("12", "0", "0", "0 0"));
+				Arguments.of("12", "0", "0", "0"), 
+				Arguments.of("1", "1", "1", "1"));
 	}
 }

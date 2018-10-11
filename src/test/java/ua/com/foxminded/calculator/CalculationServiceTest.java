@@ -27,10 +27,10 @@ import ua.com.foxminded.calculator.service.CalculationService;
  */
 class CalculationServiceTest {
 
-	private CalculationService calculationService;
+	private static CalculationService calculationService;
 	
 	@BeforeAll
-	public void setUp() {
+	public static void setUp() {
 		calculationService = new CalculationService();
 	}
 	
@@ -50,7 +50,7 @@ class CalculationServiceTest {
 	}
 	
 	@AfterAll
-	public void tearDown( ) {
+	public static void tearDown( ) {
 		calculationService = null;
 	}
 }
