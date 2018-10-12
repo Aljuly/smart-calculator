@@ -35,8 +35,9 @@ class SubtractorTest {
 	
 	static Stream<Arguments> provideTestData() {
 		return Stream.of(
-				Arguments.of("6748", "381", "7129"),
-				Arguments.of("7602", "18273", "25875"),
+				Arguments.of("1111", "999", "112"),
+				Arguments.of("6748", "381", "6367"),
+				Arguments.of("7602", "18273", "10671"),
 				Arguments.of("0", "0", "0"));
 	}
 

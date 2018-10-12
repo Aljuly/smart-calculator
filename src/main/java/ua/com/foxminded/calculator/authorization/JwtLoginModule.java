@@ -2,6 +2,7 @@ package ua.com.foxminded.calculator.authorization;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
+import ua.com.foxminded.calculator.servletes.RegisterServlet;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -15,12 +16,14 @@ import javax.security.auth.spi.LoginModule;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class JwtLoginModule implements LoginModule {
 
-    private static final Logger logger = Logger.getLogger(JwtLoginModule.class.getName());
+	private static final Logger logger = LogManager.getLogger(RegisterServlet.class.getName());
 
     // Subject reference holds the principals
     private Subject subject;
@@ -158,7 +161,7 @@ public class JwtLoginModule implements LoginModule {
             return callback.getName();
         } catch (IOException | UnsupportedCallbackException e) {
             String msg = "Failed getting the security token";
-            logger.log(Level.SEVERE, msg, e);
+            logger.log(Level.WARN, msg, e);
             throw new LoginException(msg);
         }
     }

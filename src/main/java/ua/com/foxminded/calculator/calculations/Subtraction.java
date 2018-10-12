@@ -88,7 +88,7 @@ public class Subtraction implements BinaryOperation {
 			result.add(difference);
 		}
 		// Remove leading zero if exists
-		if (result.get(result.size() - 1) == 0) result.remove(result.size() - 1);
+		if (result.size() > 1 && result.get(result.size() - 1) == 0) result.remove(result.size() - 1);
 		Collections.reverse(result);
 		// Return the result
 		return SubtractionResult.builder()

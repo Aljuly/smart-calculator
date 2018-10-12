@@ -13,6 +13,7 @@ import ua.com.foxminded.calculator.calculations.Addition;
 import ua.com.foxminded.calculator.calculations.Division;
 import ua.com.foxminded.calculator.calculations.Multiplication;
 import ua.com.foxminded.calculator.calculations.Subtraction;
+import ua.com.foxminded.calculator.dto.CalculationRequest;
 import ua.com.foxminded.calculator.dto.CalculationResult;
 
 /**
@@ -33,8 +34,8 @@ public class CalculationService {
 		operations.put(100004, (new Division(true))::calculate);
 	}
 	
-	public CalculationResult calculate(int operation, String first, String second) throws CalculationException {
-		if(operation < 100000 || operation > 100004) throw new CalculationException("Selected operation undefined!");
-		return this.operations.get(operation).apply(first, second);
+	public CalculationResult calculate(CalculationRequest request) throws CalculationException {
+		if(request.getId() < 100000 || request.getId() > 100004) throw new CalculationException("Selected operation undefined!");
+		return this.operations.get(request.getId()).apply(request.getFirst(), request.getSecond());
 	}
 }
