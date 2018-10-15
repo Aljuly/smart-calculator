@@ -34,8 +34,8 @@ public class CalculationService {
 		operations.put(100004, (new Division(true))::calculate);
 	}
 	
-	public CalculationResult calculate(CalculationRequest request) throws CalculationException {
-		if(request.getId() < 100000 || request.getId() > 100004) throw new CalculationException("Selected operation undefined!");
-		return this.operations.get(request.getId()).apply(request.getFirst(), request.getSecond());
+	public CalculationResult calculate(int id, String first, String second) throws CalculationException {
+		if(id < 100000 || id > 100004) throw new CalculationException("Selected operation undefined!");
+		return this.operations.get(id).apply(first, second);
 	}
 }

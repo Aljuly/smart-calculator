@@ -37,24 +37,17 @@ class CalculationServiceTest {
 	
 	@Test
 	public void shouldReturnSelectedResult() throws CalculationException {
-		assertTrue(calculationService.calculate(
-				CalculationRequest.builder().id(100000).first("1").second("1").build()) instanceof AdditionResult);
-		assertTrue(calculationService.calculate(
-				CalculationRequest.builder().id(100001).first("1").second("1").build()) instanceof SubtractionResult);
-		assertTrue(calculationService.calculate(
-				CalculationRequest.builder().id(100002).first("1").second("1").build()) instanceof MultiplicationResult);
-		assertTrue(calculationService.calculate(
-				CalculationRequest.builder().id(100003).first("1").second("1").build()) instanceof DivisionResult);
-		assertTrue(calculationService.calculate(
-				CalculationRequest.builder().id(100004).first("1").second("1").build()) instanceof DivisionResult);
+		assertTrue(calculationService.calculate(100000, "1", "1") instanceof AdditionResult);
+		assertTrue(calculationService.calculate(100001, "1", "1") instanceof SubtractionResult);
+		assertTrue(calculationService.calculate(100002, "1", "1") instanceof MultiplicationResult);
+		assertTrue(calculationService.calculate(100003, "1", "1") instanceof DivisionResult);
+		assertTrue(calculationService.calculate(100004, "1", "1") instanceof DivisionResult);
 	}
 	
 	@Test
 	public void shouldThrowExceptionIfWrongOperationCodeIsGiven() {
-		assertThrows(CalculationException.class, () -> calculationService.calculate(
-				CalculationRequest.builder().id(1).first("1").second("1").build()));
-		assertThrows(CalculationException.class, () -> calculationService.calculate(
-				CalculationRequest.builder().id(100005).first("1").second("1").build()));
+		assertThrows(CalculationException.class, () -> calculationService.calculate(10, "1", "1"));
+		assertThrows(CalculationException.class, () -> calculationService.calculate(100005, "1", "1"));
 	}
 	
 	@AfterAll

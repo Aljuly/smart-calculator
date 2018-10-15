@@ -5,18 +5,16 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.foxminded.calculator.servletes.RegisterServlet;
-
 import java.io.IOException;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@WebFilter()
+@WebFilter(filterName="LoginFilter")
 public class LoginFilter implements Filter {
 
-	private static final Logger logger = LogManager.getLogger(RegisterServlet.class.getName());
+	private static final Logger logger = LogManager.getLogger(LoginFilter.class.getName());
 
     private static final String AUTH_HEADER_KEY = "Authorization";
     private static final String AUTH_HEADER_VALUE_PREFIX = "Bearer "; // with trailing space to separate token
@@ -36,8 +34,11 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest; 
         
         try {
+            // LookUp for the selected calculation mode. If selected division with period,
+            // define is current user authenticated...
             String jwt = getBearerToken(httpRequest);
             if (jwt != null && !jwt.isEmpty()) {
+                // Here we calling JwtLoginModule.login() method thru Tomcat internals
                 httpRequest.login(jwt, "");
                 logger.info("Logged in using JWT");
                 filterChain.doFilter(servletRequest, servletResponse);

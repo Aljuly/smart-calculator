@@ -1,8 +1,8 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
 	      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	      version="3.0">
+	      http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
+	      version="3.1">
  <servlet>
   <servlet-name>LoginServlet</servlet-name>
   <servlet-class>ua.com.foxminded.calculator.servletes.LoginServlet</servlet-class>
@@ -14,6 +14,10 @@
  <servlet>
   <servlet-name>DescriptionServlet</servlet-name>
   <servlet-class>ua.com.foxminded.calculator.servletes.DescriptionServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CalculationServlet</servlet-name>
+  <servlet-class>ua.com.foxminded.calculator.servletes.CalculationServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>LoginServlet</servlet-name>
@@ -27,6 +31,14 @@
   <servlet-name>DescriptionServlet</servlet-name>
   <url-pattern>/description</url-pattern>
  </servlet-mapping>
+ <servlet-mapping>
+   <servlet-name>CalculationServlet</servlet-name>
+   <url-pattern>/calculation</url-pattern>
+ </servlet-mapping>
+ <filter-mapping>
+   <filter-name>LoginFilter</filter-name>
+   <url-pattern>/*</url-pattern>
+ </filter-mapping>
  <resource-ref>
   <description>postgreSQL Datasource example</description>
   <res-ref-name>jdbc/postgres</res-ref-name>

@@ -2,7 +2,6 @@ package ua.com.foxminded.calculator.authorization;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
-import ua.com.foxminded.calculator.servletes.RegisterServlet;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -23,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 
 public class JwtLoginModule implements LoginModule {
 
-	private static final Logger logger = LogManager.getLogger(RegisterServlet.class.getName());
+	private static final Logger logger = LogManager.getLogger(JwtLoginModule.class.getName());
 
     // Subject reference holds the principals
     private Subject subject;
