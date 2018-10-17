@@ -8,6 +8,7 @@ import ua.com.foxminded.calculator.service.AuthenticationException;
 import ua.com.foxminded.calculator.service.UserService;
 
 import javax.naming.NamingException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-//@WebServlet(urlPatterns = "/users/register")
+@WebServlet(
+		name = "RegisterServlet",
+        urlPatterns = "/users/register"
+)
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LogManager.getLogger(RegisterServlet.class.getName());

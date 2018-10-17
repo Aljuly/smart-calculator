@@ -8,6 +8,7 @@ package ua.com.foxminded.calculator.servletes;
 
 import java.io.IOException;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,10 @@ import ua.com.foxminded.calculator.service.CalculationService;
  * @author Alexander Zhulinsky
  * @version 1.0 31 Aug 2018
  */
+@WebServlet(
+		name = "CalculationServlet",
+        urlPatterns = "/calculations/calculate"
+)
 public class CalculationServlet extends HttpServlet {
 		
 	private static final long serialVersionUID = 2900362493788749479L;

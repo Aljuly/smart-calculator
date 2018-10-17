@@ -11,6 +11,7 @@ import ua.com.foxminded.calculator.dto.DescriptionResponse;
 import ua.com.foxminded.calculator.model.Operation;
 import ua.com.foxminded.calculator.service.DescriptionService;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,10 @@ import org.apache.logging.log4j.Logger;
  * @author Alexander Zhulinsky
  * @version 1.0 27 Aug 2018
  */
+@WebServlet(
+		name = "DescriptionServlet",
+        urlPatterns = "/general/description"
+)
 public class DescriptionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

@@ -15,6 +15,7 @@ import ua.com.foxminded.calculator.service.AuthenticationException;
 import ua.com.foxminded.calculator.service.UserService;
 
 import javax.naming.NamingException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +32,10 @@ import org.apache.logging.log4j.Logger;
  * @author Alexander Zhulinsky
  * @version 1.0 27 Aug 2018
  */
+@WebServlet(
+		name = "LoginServlet",
+        urlPatterns = "/users/login"
+)
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -6780052647099318507L;

@@ -11,7 +11,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@WebFilter(filterName="LoginFilter")
+@WebFilter(
+		filterName="LoginFilter",
+		urlPatterns="/calculations/*"
+)
 public class LoginFilter implements Filter {
 
 	private static final Logger logger = LogManager.getLogger(LoginFilter.class.getName());

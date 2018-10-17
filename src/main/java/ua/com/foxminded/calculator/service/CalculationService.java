@@ -13,7 +13,6 @@ import ua.com.foxminded.calculator.calculations.Addition;
 import ua.com.foxminded.calculator.calculations.Division;
 import ua.com.foxminded.calculator.calculations.Multiplication;
 import ua.com.foxminded.calculator.calculations.Subtraction;
-import ua.com.foxminded.calculator.dto.CalculationRequest;
 import ua.com.foxminded.calculator.dto.CalculationResult;
 
 /**
