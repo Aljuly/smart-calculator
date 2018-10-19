@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import ua.com.foxminded.calculator.dto.AdditionResult;
-import ua.com.foxminded.calculator.dto.CalculationRequest;
 import ua.com.foxminded.calculator.dto.DivisionResult;
 import ua.com.foxminded.calculator.dto.MultiplicationResult;
 import ua.com.foxminded.calculator.dto.SubtractionResult;

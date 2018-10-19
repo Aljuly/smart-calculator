@@ -6,6 +6,8 @@
  */
 package ua.com.foxminded.calculator.servletes;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.io.IOException;
 
 import javax.servlet.annotation.WebServlet;
@@ -15,9 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tomcat.jni.Pool;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+import ua.com.foxminded.calculator.dto.CalculationResult;
 import ua.com.foxminded.calculator.service.CalculationException;
 import ua.com.foxminded.calculator.service.CalculationService;
 
@@ -35,6 +42,50 @@ public class CalculationServlet extends HttpServlet {
 		
 	private static final long serialVersionUID = 2900362493788749479L;
 	private static final Logger logger = LogManager.getLogger(CalculationServlet.class.getName());
+	
+	private static JedisPool pool = null;
+	
+	@Override
+	public void init() {
+		pool = new JedisPool(new JedisPoolConfig(), "localhost", 6379);
+	}
+	
+	@Override
+	public void destroy() {
+		pool.destroy();
+	}
+	
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("application/json");
+		Jedis jedis = null;
+		String result = null;
+		// Get the calculation Service
+		CalculationService calculationService = new CalculationService();
+		try {
+			jedis = pool.getResource();
+			String cacheKey = getCacheKey(request.getParameter("id"), 
+					request.getParameter("firstnumber"), 
+					request.getParameter("firstnumber"));
+			String result = jedis.get(cacheKey);
+			if (result == null) {
+				CalculationResult result = calculationService.calculate(
+						Integer.parseInt(request.getParameter("id"), 
+						request.getParameter("firstnumber"), 
+						request.getParameter("firstnumber"));
+				// Initialize JSON Mapper
+		        ObjectMapper mapper = new ObjectMapper();
+				jedis.set(cacheKey, value)
+			}
+		} catch {
+			
+		} finally {
+			
+		}
+	}
+	
+	private String getCacheKey(String id, String first, String second) {
+		return id + first + second;
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
