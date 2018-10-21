@@ -6,9 +6,8 @@
  */
 package ua.com.foxminded.calculator.servletes;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.tomcat.jni.Pool;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -55,32 +53,50 @@ public class CalculationServlet extends HttpServlet {
 		pool.destroy();
 	}
 	
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
+	@SuppressWarnings("deprecation")
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
+	        throws IOException, CalculationException {
+	    // Prepare output
 		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		// Get caching
 		Jedis jedis = null;
-		String result = null;
+		String value = null;
 		// Get the calculation Service
 		CalculationService calculationService = new CalculationService();
 		try {
 			jedis = pool.getResource();
-			String cacheKey = getCacheKey(request.getParameter("id"), 
-					request.getParameter("firstnumber"), 
-					request.getParameter("firstnumber"));
-			String result = jedis.get(cacheKey);
-			if (result == null) {
+		     // Read the request data
+	        String id = request.getParameter("id");
+	        String first = request.getParameter("firstnumber");
+	        String second = request.getParameter("secondnumber");
+	        // Get the cache key
+			String cacheKey = getCacheKey(id, first, second);
+			// Search for the cached value
+			value = jedis.get(cacheKey);
+			// If value does not exists, define it
+			if (value == null) {
 				CalculationResult result = calculationService.calculate(
-						Integer.parseInt(request.getParameter("id"), 
-						request.getParameter("firstnumber"), 
-						request.getParameter("firstnumber"));
+						Integer.parseInt(request.getParameter("id")), 
+						first, 
+						second);
 				// Initialize JSON Mapper
 		        ObjectMapper mapper = new ObjectMapper();
-				jedis.set(cacheKey, value)
+		        // Write result to the cache
+		        value = mapper.writeValueAsString(result);
+				jedis.set(cacheKey, value);
+			} else {
+			    logger.info("From cache");
 			}
-		} catch {
-			
 		} finally {
-			
+			pool.returnResource(jedis);
 		}
+		// Write result to the output
+		try {
+		    out.print(value);
+		} finally {
+            out.close();
+        }
 	}
 	
 	private String getCacheKey(String id, String first, String second) {
@@ -89,25 +105,11 @@ public class CalculationServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// Get the calculation Service
-		CalculationService calculationService = new CalculationService();
-		// Read the request data
-		int id = Integer.parseInt(request.getParameter("id"));
-		String first = request.getParameter("firstnumber");
-		String second = request.getParameter("secondnumber");
-        // Initialize JSON Mapper
-        ObjectMapper mapper = new ObjectMapper();
         try {
-        	// Prepare response
-            response.setContentType("application/json");
-        	// Return the response to client
-        	mapper.writeValue(response.getOutputStream(), calculationService.calculate(id, first, second));
-        } catch (CalculationException | IOException e) {
+            processRequest(request, response);
+        } catch (IOException | NumberFormatException | CalculationException e) {
         	logger.error(e.getMessage());
-        	response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, e.getMessage());
+        	response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "An Error has occurred!");
 		}
-        
-        
 	}
-	
 }
