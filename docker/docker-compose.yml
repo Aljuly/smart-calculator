@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  app-web:
+    build: ./web
+    ports:
+      - "8080:8080"
+    links:
+      - app-db
+      - redis
+
+  app-db:
+    build: ./db
+    ports:
+      - "5432:5432"
+    volumes_from:
+      - app-db-data
+
+  app-db-data:
+    image: busybox
+    command: echo 'Data Container for PostgreSQL'
+    volumes:
+      - /var/lib/postgresql/data
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"

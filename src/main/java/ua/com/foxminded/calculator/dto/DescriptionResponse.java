@@ -18,6 +18,7 @@ import lombok.Data;
  */
 @Data
 public class DescriptionResponse {
+	private int id;
     private String name;
     private String description;
 
@@ -26,7 +27,8 @@ public class DescriptionResponse {
             @JsonProperty("id") int id,
             @JsonProperty("title") String name,
             @JsonProperty("description") String description) {
-        this.name = name;
+        this.id = id;
+    	this.name = name;
         this.description = description;
     }
 }
