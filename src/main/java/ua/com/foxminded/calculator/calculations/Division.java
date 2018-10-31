@@ -22,7 +22,9 @@ import ua.com.foxminded.calculator.dto.Step;
 public class Division implements BinaryOperation {
 
     private static final byte FRACTION_DIGITS_PERIOD_SEARCH_LIMIT = 10;
-
+    private static final int DIVISION_INDEX = 100003;
+    private static final int DIVISION_WITH_PERIOD_INDEX = 100004;
+    
     private boolean withFractionPart;
 
     /**
@@ -176,8 +178,10 @@ public class Division implements BinaryOperation {
             //Update reminder if fraction was calculated
             result.setReminder(Integer.toString(difference));
             steps.add(new Step(Integer.toString(difference), "0", Integer.toString(difference)));
+            result.setId(DIVISION_WITH_PERIOD_INDEX);
         } else {
             steps.add(new Step(number.toString(), "0", Integer.toString(Integer.parseInt(number.toString()))));
+            result.setId(DIVISION_INDEX);
         }
         //add the steps
         result.getSteps().addAll(steps);
