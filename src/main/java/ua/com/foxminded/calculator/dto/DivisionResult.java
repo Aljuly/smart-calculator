@@ -29,7 +29,6 @@ public class DivisionResult extends CalculationResult {
     private String quotient;
     private String reminder;
     private String fraction;
-    private String alert;
 
     private List<Step> steps = new ArrayList<>();
 
@@ -43,19 +42,17 @@ public class DivisionResult extends CalculationResult {
             @JsonProperty("alert") String alert,
             @JsonProperty("fraction") String fraction,
             @JsonProperty("calculationSteps") List<Step> steps) {
-    	super(id);
+    	super(id, alert);
         this.dividend = dividend;
         this.divisor = divisor;
         this.quotient = quotient;
         this.reminder = reminder;
-        this.alert = alert;
         this.fraction = fraction;
         this.steps = steps;
     }
 
     public DivisionResult(String alert) {
-    	super(0);
-        this.alert = alert;
+    	super(0, alert);
     }
     
     public DivisionResult() {

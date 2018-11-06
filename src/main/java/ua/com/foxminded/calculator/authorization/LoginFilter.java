@@ -22,8 +22,6 @@ public class LoginFilter implements Filter {
     private static final String AUTH_HEADER_KEY = "Authorization";
     private static final String AUTH_HEADER_VALUE_PREFIX = "Bearer "; // with trailing space to separate token
 
-    private static final int STATUS_CODE_UNAUTHORIZED = 401;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     	logger.info( "JwtAuthenticationFilter initialized" );
@@ -46,13 +44,16 @@ public class LoginFilter implements Filter {
                 logger.info("Logged in using JWT");
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
-            	logger.info("No JWT provided, go on unauthenticated");
+            	logger.log(Level.WARN, "Only registered users can have access to this operation!! ");
+            	((HttpServletResponse) servletResponse).sendError(
+            			HttpServletResponse.SC_UNAUTHORIZED, 
+            			"Only registered users can have access to this operation ");
             }
         } catch (final Exception e) {
         	logger.log(Level.WARN, "Failed logging in with security token", e);
-            HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-            httpResponse.setContentLength(0);
-            httpResponse.setStatus(STATUS_CODE_UNAUTHORIZED);
+        	((HttpServletResponse) servletResponse).sendError(
+        			HttpServletResponse.SC_UNAUTHORIZED, 
+        			"Failed logging in with security token ");
         }
     }
 

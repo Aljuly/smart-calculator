@@ -24,7 +24,7 @@ public class SubtractionResult extends CalculationResult {
 			@JsonProperty("subtrahent") String subtrahent, 
 			@JsonProperty("difference") String difference, 
 			@JsonProperty("negative") boolean negative) {
-		super(id);
+		super(id, "");
 		this.menued = menued;
 		this.subtrahent = subtrahent;
 		this.difference = difference;

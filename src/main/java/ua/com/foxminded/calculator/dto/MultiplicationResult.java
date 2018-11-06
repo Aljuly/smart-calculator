@@ -27,7 +27,7 @@ public class MultiplicationResult extends CalculationResult {
 			@JsonProperty("secondTertm") String second, 
 			@JsonProperty("product") String product,
 			@JsonProperty("calculationSteps") List<String> steps) {
-		super(id);
+		super(id, "");
 		this.second = second;
 		this.first = first;
 		this.product = product;

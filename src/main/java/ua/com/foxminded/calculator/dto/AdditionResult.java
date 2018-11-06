@@ -27,7 +27,7 @@ public class AdditionResult extends CalculationResult {
 			@JsonProperty("firstTerm") String first,
 			@JsonProperty("secondTerm") String second,
 			@JsonProperty("sum") String sum) {
-		super(id);
+		super(id, "");
 		this.firstTerm = first;
 		this.secondTerm = second;
 		this.sum = sum;

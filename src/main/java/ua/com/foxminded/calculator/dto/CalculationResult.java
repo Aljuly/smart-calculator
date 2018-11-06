@@ -6,13 +6,20 @@
  */
 package ua.com.foxminded.calculator.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public abstract class CalculationResult {
+@AllArgsConstructor
+public class CalculationResult {
 	private int id;
+	private String alert;
 	
 	public CalculationResult(int id) {
 		this.id = id;
+	}
+	
+	public boolean hasAlert() {
+		return alert.length() > 0;
 	}
 }

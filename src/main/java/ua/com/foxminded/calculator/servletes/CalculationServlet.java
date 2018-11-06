@@ -80,6 +80,7 @@ public class CalculationServlet extends HttpServlet {
 						Integer.parseInt(request.getParameter("id")), 
 						first, 
 						second);
+				if (result.hasAlert()) throw new CalculationException(result.getAlert());
 				// Initialize JSON Mapper
 		        ObjectMapper mapper = new ObjectMapper();
 		        // Write result to the cache
@@ -88,6 +89,9 @@ public class CalculationServlet extends HttpServlet {
 			} else {
 			    logger.info("From cache");
 			}
+		} catch (CalculationException e) {
+			logger.error(e.getMessage());
+            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, e.getMessage());
 		} finally {
 			pool.returnResource(jedis);
 		}
