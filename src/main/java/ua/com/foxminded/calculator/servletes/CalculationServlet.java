@@ -75,19 +75,23 @@ public class CalculationServlet extends HttpServlet {
 			// Search for the cached value
 			value = jedis.get(cacheKey);
 			// If value does not exists, define it
+			// Initialize JSON Mapper
+		    ObjectMapper mapper = new ObjectMapper();
 			if (value == null) {
 				CalculationResult result = calculationService.calculate(
 						Integer.parseInt(request.getParameter("id")), 
 						first, 
 						second);
 				if (result.hasAlert()) throw new CalculationException(result.getAlert());
-				// Initialize JSON Mapper
-		        ObjectMapper mapper = new ObjectMapper();
 		        // Write result to the cache
 		        value = mapper.writeValueAsString(result);
 				jedis.set(cacheKey, value);
 			} else {
 			    logger.info("From cache");
+			    // Check whereas cached value contain error message
+			    // Initialize JSON Mapper
+		        CalculationResult result = mapper.readValue(value, CalculationResult.class);
+		        if (result.hasAlert()) throw new CalculationException(result.getAlert());
 			}
 		} catch (CalculationException e) {
 			logger.error(e.getMessage());
