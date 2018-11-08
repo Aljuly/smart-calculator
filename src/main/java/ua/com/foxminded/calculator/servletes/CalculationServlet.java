@@ -8,6 +8,8 @@ package ua.com.foxminded.calculator.servletes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +45,9 @@ public class CalculationServlet extends HttpServlet {
 	
 	private static JedisPool pool = null;
 	
+	private static final String VALUE = "VALUE";
+	private static final String ALERT = "ALERT";
+	
 	@Override
 	public void init() {
 		pool = new JedisPool(new JedisPoolConfig(), "localhost", 6379);
@@ -62,6 +67,7 @@ public class CalculationServlet extends HttpServlet {
 		// Get caching
 		Jedis jedis = null;
 		String value = null;
+		String alert = null;
 		// Get the calculation Service
 		CalculationService calculationService = new CalculationService();
 		try {
@@ -73,7 +79,8 @@ public class CalculationServlet extends HttpServlet {
 	        // Get the cache key
 			String cacheKey = getCacheKey(id, first, second);
 			// Search for the cached value
-			value = jedis.get(cacheKey);
+			value = jedis.hget(cacheKey, VALUE);
+			alert = jedis.hget(cacheKey, ALERT);
 			// If value does not exists, define it
 			// Initialize JSON Mapper
 		    ObjectMapper mapper = new ObjectMapper();
@@ -82,16 +89,21 @@ public class CalculationServlet extends HttpServlet {
 						Integer.parseInt(request.getParameter("id")), 
 						first, 
 						second);
-				if (result.hasAlert()) throw new CalculationException(result.getAlert());
-		        // Write result to the cache
+				// Write result to the cache
 		        value = mapper.writeValueAsString(result);
-				jedis.set(cacheKey, value);
+		        Map<String, String> data = new HashMap<>();
+				data.put(VALUE, value);
+				data.put(ALERT, result.getAlert());
+				jedis.hmset(cacheKey, data);
+				if (result.hasAlert()) {
+					throw new CalculationException(result.getAlert());
+				}	        
 			} else {
 			    logger.info("From cache");
 			    // Check whereas cached value contain error message
-			    // Initialize JSON Mapper
-		        CalculationResult result = mapper.readValue(value, CalculationResult.class);
-		        if (result.hasAlert()) throw new CalculationException(result.getAlert());
+			    if ((alert != null) && (alert.length() > 0)) {
+			    		throw new CalculationException(alert);
+			    }
 			}
 		} catch (CalculationException e) {
 			logger.error(e.getMessage());
