@@ -1,0 +1,39 @@
+<article class="operation-def">
+  <h1>Calculation plot</h1>
+<!--<div *ngIf = "divisionResult.isEmpty() == false">-->
+  <div>
+    <table cellspacing="" style="margin:auto">
+      <tbody>
+        <tr>
+          <table>
+            <tbody style="font-size:1.3em">
+              <tr>
+                <td rowspan="2" class="t-cell" style="min-width:11px">-</td>
+                <td *ngFor="let c of dividend | slice:0" class="t-cell" style="min-width:11px">{{c}}</td>
+                <td *ngFor="let c of divisor | slice:0; let first = first" class="t-cell bottom-border" style="min-width:11px" [ngClass]="{'left-border': first}">{{c}}</td>
+              </tr>
+              <tr>
+                <td *ngFor="let c of second | slice:0" class="t-cell" style="min-width:11px" [ngClass]="{'bottom-border': c!=' '}">{{c}}</td>
+                <td *ngFor="let c of result | slice:0; let first = first" class="t-cell top-border" [ngClass]="{'left-border': first}">{{c}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </tr>
+        <tr *ngFor="let step of stepsOut">
+          <table>
+          <tbody style="font-size:1.3em ">
+            <tr>
+              <td *ngFor="let c of step.stub | slice: 0" rowspan="2" class="t-cell" style="min-width:11px">{{c}}</td>
+              <td *ngIf="step.secondnumber.length > 0" rowspan="2" class="t-cell" style="min-width:11px">-</td>
+              <td *ngFor="let c of step.firstnumber | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
+            </tr>
+            <tr *ngIf = "step.secondnumber.length > 0">
+              <td *ngFor="let c of step.secondnumber | slice: 0" class="t-cell" style="min-width:11px" [ngClass]="{'bottom-border': c!=' '}">{{c}}</td>
+            </tr>
+          </tbody>
+          </table>       
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>

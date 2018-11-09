@@ -1,0 +1,43 @@
+{
+  "description": [
+    {
+      "id": "1",
+      "title": "Addition",
+      "description": "Let's make this math operation!!"
+    },
+    {
+      "id": "2",
+      "title": "Subtraction",
+      "description": "This is subtraction!"
+    },
+    {
+      "id": "3",
+      "title": "Multiplication",
+      "description": "Let's Multiply two numbers.."
+    },
+    {
+      "id": "4",
+      "title": "Integer Division",
+      "description": "Define reminder from division of the two integers!"
+    },
+    {
+      "id": "5",
+      "title": "Division with period",
+      "description": "Define periodic part"
+    }
+  ],
+  "users": [
+    {
+      "login": "bruno",
+      "name": "bruno",
+      "email": "bruno@email.com",
+      "token": "bruno"
+    },
+    {
+      "login": "nilson",
+      "name": "nilson",
+      "email": "nilson@email.com",
+      "token": "nilson"
+    }
+  ]
+}

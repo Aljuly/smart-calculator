@@ -1,0 +1,21 @@
+<!-- Subtraction -->
+<article class="operation-def">
+  <h1> Calculation plot </h1>
+  <div *ngIf = "subtractionResult.isEmpty() == false">
+    <table cellspacing="" style="margin: auto">
+      <tbody style="font-size:1.3em">
+        <tr>
+          <td *ngFor= "let c of stub | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
+          <td rowspan="2" class="t-cell">-</td>
+          <td *ngFor="let c of firstTerm | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
+        </tr>
+        <tr>
+          <td *ngFor="let c of secondTerm | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
+        </tr>
+        <tr>
+          <td *ngFor="let c of difference | slice: 0" class="t-cell top-border" style="min-width:11px">{{c}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>

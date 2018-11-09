@@ -1,0 +1,4 @@
+{
+    "/users/authenticate\\?username=:username&password=:password": "/users?name=:username&token=:password",
+    "/users/authenticate": "/users?name=bruno"
+}

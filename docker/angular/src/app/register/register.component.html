@@ -1,0 +1,61 @@
+<div class="modal-header">
+  <h4 class="modal-title">Register</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+<div class="page login-page">
+    <div class="container">
+        <div class="form-outer text-center align-items-center">
+            <div >
+              <div class="logo text-uppercase"><span>SMART</span><strong class="text-primary">CALCULATOR</strong></div>
+              <p>Please, provide actual registration information</p>
+              <alert></alert>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="text-left form-validate">
+                <div class="form-group-material">
+                  <label for="userName" class="label-material">User Name    </label>
+                  <input type="text" formControlName="userName" class="input-material" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+                  <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                    <div *ngIf="f.userName.errors.required">User Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group-material">
+                  <label for="login" class="label-material">User login      </label>
+                  <input type="text" formControlName="login" class="input-material" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+                  <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                    <div *ngIf="f.login.errors.required">Login is required</div>
+                  </div>
+                </div>
+                <div class="form-group-material">
+                  <label for="email" class="label-material">Email Address     </label>
+                  <input type="email" formControlName="email" class="input-material" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <div class="form-group-material">
+                  <label for="password" class="label-material">Password        </label>
+                  <input type="password" formControlName="password" class="input-material" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Please enter your password</div>
+                      <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+                <div class="form-group terms-conditions text-center">
+                  <input id="register-agree" name="registerAgree" type="checkbox" required value="1" data-msg="Your agreement is required" class="form-control-custom">
+                  <label for="register-agree">I agree with the terms and policy</label>
+                </div>
+                <div class="form-group text-center">
+                    <button [disabled]="loading" class="btn btn-primary">Register</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </div>
+              </form>
+              <small>Already have an account? </small>
+              <!-- <a [routerLink]="['/login']" class="signup">Login</a> -->
+              <a (click)="onLoginClick()" class="signup">Login</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

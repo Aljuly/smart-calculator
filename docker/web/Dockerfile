@@ -1,6 +1,6 @@
 FROM tomcat:9.0.12
 LABEL key aljuly
-ADD smart-calculator-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/
+ADD smart-calculator.war /usr/local/tomcat/webapps/
 ADD tomcat-users.xml /usr/local/tomcat/conf/
 ADD jaas.config /usr/local/tomcat/conf/
 EXPOSE 8080

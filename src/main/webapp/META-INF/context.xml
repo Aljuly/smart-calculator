@@ -23,7 +23,7 @@
 
   <Resource name="jdbc/postgres" auth="Container"
             type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
-            url="jdbc:postgresql://localhost:5432/calculator"
+            url="jdbc:postgresql://192.168.99.100:5432/calculator"
 	        factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 	        testWhileIdle="true"
 	        testOnBorrow="true"

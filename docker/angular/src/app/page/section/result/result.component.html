@@ -1,0 +1,22 @@
+<article class = "output-data">
+    <alert></alert>
+    <div style="text-align: center">
+        <span [ngSwitch]="id">
+            <p *ngSwitchCase="100000">
+                <app-addition-component [additionResult] = "additionResult"></app-addition-component>
+            </p>
+            <p *ngSwitchCase="100001">
+                <app-subtraction-formatter [subtractionResult] = "subtractionResult"></app-subtraction-formatter>
+            </p>
+            <p *ngSwitchCase="100002">
+                <app-multiplycation-formatter [multiplicationResult] = "multiplicationResult"></app-multiplycation-formatter>   
+            </p>
+            <p *ngSwitchCase="100003">
+                <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>
+            </p>
+            <p *ngSwitchCase="100004">
+                <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>
+            </p>
+        </span>
+    </div>
+</article>

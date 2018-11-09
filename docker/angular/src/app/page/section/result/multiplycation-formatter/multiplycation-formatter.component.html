@@ -1,0 +1,26 @@
+<article class="operation-def">
+  <h1>Calculation plot</h1>
+  <div *ngIf = "multiplicationResult.isEmpty() == false">
+    <table cellspacing="" style="margin:auto">
+      <tbody style="font-size:1.3em">
+        <tr>
+          <td *ngFor= "let c of stub | slice: 0" class="t-cell">{{c}}</td>
+          <td rowspan="2" class="t-cell">*</td>
+          <td *ngFor="let c of firstFactor | slice: 0" class="t-cell">{{c}}</td>
+        </tr>
+        <tr>
+          <td *ngFor= "let c of stub | slice: 0" class="t-cell">{{c}}</td>
+          <td *ngFor="let c of secondFactor | slice: 0" class="t-cell bottom-border">{{c}}</td>
+        </tr>
+        <!-- Output calculation steps -->
+        <tr *ngFor="let step of stepsOut">
+          <td *ngFor="let c of step | slice: 0" class="t-cell">{{c}}</td>
+        </tr>
+        <!-- Oupput result -->
+        <tr>
+          <td *ngFor="let c of product | slice: 0" class="t-cell top-border">{{c}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>

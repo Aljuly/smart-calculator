@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title">Login</h4>
+  <button type="button" class="close" aria-label="Close" (click)="onDismissClick()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+<div class="page login-page">
+  <div class="container">
+    <div class="form-outer text-center align-items-center">
+      <div >
+        <div class="logo text-uppercase"><span>Smart</span><strong class="text-primary">Calculator</strong></div>
+          <alert></alert>
+          <p>Enter Login information</p>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="text-left form-validate">
+            <div class="form-group-material">
+              <label for="username" class="label-material">Username</label>
+              <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="input-material">
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Username is required</div>
+              </div>
+            </div>
+            <div class="form-group-material">
+              <label for="password" class="label-material">Password</label>
+              <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="input-material">
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button [disabled]="loading" class="btn btn-primary">Login</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+          </form>
+          <!-- <a href="#" class="forgot-pass">Forgot Password?</a> -->
+          <small>Do not have an account? </small>
+          <!-- <a [routerLink]="['/register']" class="signup">Signup</a> -->
+          <a (click)="onRegisterClick()" class="signup">Signup</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
