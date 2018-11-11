@@ -2,6 +2,11 @@ version: '2'
 
 services:
 
+  angular: # name of the first service
+    build: angular # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200" # specify port forewarding
+
   app-web:
     build: ./web
     ports:
