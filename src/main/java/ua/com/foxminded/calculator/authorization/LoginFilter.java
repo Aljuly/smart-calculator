@@ -40,20 +40,26 @@ public class LoginFilter implements Filter {
             String jwt = getBearerToken(httpRequest);
             if (jwt != null && !jwt.isEmpty()) {
                 // Here we calling JwtLoginModule.login() method thru Tomcat internals
-                httpRequest.login(jwt, "");
+                //httpRequest.login(jwt, "");
                 logger.info("Logged in using JWT");
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
             	logger.log(Level.WARN, "Only registered users can have access to this operation!! ");
+            	filterChain.doFilter(servletRequest, servletResponse);
+            	/*
             	((HttpServletResponse) servletResponse).sendError(
             			HttpServletResponse.SC_UNAUTHORIZED, 
             			"Only registered users can have access to this operation ");
+            	*/
             }
         } catch (final Exception e) {
         	logger.log(Level.WARN, "Failed logging in with security token", e);
+        	filterChain.doFilter(servletRequest, servletResponse);
+        	/*
         	((HttpServletResponse) servletResponse).sendError(
         			HttpServletResponse.SC_UNAUTHORIZED, 
         			"Failed logging in with security token ");
+        	*/
         }
     }
 
