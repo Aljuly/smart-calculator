@@ -38,7 +38,8 @@ class SubtractorTest {
 				Arguments.of("1111", "999", "112"),
 				Arguments.of("6748", "381", "6367"),
 				Arguments.of("7602", "18273", "10671"),
-				Arguments.of("0", "0", "0"));
+				Arguments.of("0", "0", "0"),
+				Arguments.of("231", "245", "14"));
 	}
 
 }

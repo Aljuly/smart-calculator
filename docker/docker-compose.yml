@@ -3,24 +3,9 @@ version: '2'
 services:
 
   angular: 
-    build: angular 
+    image: aljuly/angular 
     ports:
       - "4200:4200" 
-
-  app-web:
-    build: ./web
-    ports:
-      - "8080:8080"
-    links:
-      - app-db
-      - redis
-
-  app-db:
-    build: ./db
-    ports:
-      - "5432:5432"
-    volumes_from:
-      - app-db-data
 
   app-db-data:
     image: busybox
@@ -28,7 +13,22 @@ services:
     volumes:
       - /var/lib/postgresql/data
 
+  app-db:
+    image: aljuly/app-db
+    ports:
+      - "5432:5432"
+    volumes_from:
+      - app-db-data
+
   redis:
     image: "redis:alpine"
     ports:
       - "6379:6379"
+
+  app-web:
+    image: aljuly/app-web
+    ports:
+      - "8080:8080"
+    links:
+      - app-db
+      - redis

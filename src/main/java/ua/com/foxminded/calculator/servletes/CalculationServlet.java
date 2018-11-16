@@ -50,7 +50,7 @@ public class CalculationServlet extends HttpServlet {
 	
 	@Override
 	public void init() {
-		pool = new JedisPool(new JedisPoolConfig(), "192.168.99.100", 6379);
+		pool = new JedisPool(new JedisPoolConfig(), "localhost", 6379);
 	}
 	
 	@Override
