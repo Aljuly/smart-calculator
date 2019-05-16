@@ -1,0 +1,27 @@
+<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+    <li class="nav-item">
+        <div *ngIf="signedIn">
+            <span class="d-none d-sm-inline-block" style="color: #f4f5fa">
+                Hello, {{user.username}}!
+            </span>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div *ngIf="!signedIn">
+            <a [routerLink]="['/login']" class="nav-link logout">
+                <span class="d-none d-sm-inline-block">
+                    Log In
+                </span>
+                <i class="fas fa-sign-in-alt"></i>
+            </a>   
+        </div>
+        <div *ngIf="signedIn">
+            <a (click)="logout()" class="nav-link logout" style="color: #f4f5fa">
+                <span class="d-none d-sm-inline-block" >
+                    Log Out
+                </span>
+                <i class="fas fa-sign-out-alt"></i>
+            </a>   
+        </div>
+    </li>
+</ul>

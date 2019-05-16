@@ -1,0 +1,10 @@
+.operation-def {
+  background: #eae7e3;
+  border-radius: 6px;
+  display: block;
+  padding: 10px;
+  padding-top: 1px;
+  text-align: left;
+  margin: 15px;
+  height: auto;
+}

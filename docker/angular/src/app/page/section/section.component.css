@@ -1,0 +1,28 @@
+/*
+* =========================================================
+*     Sections
+* =========================================================
+*/
+.operation-def,
+.input-data,
+.output-data {
+  background: #eae7e3;
+  border-radius: 6px;
+  display: block;
+  padding: 10px;
+  padding-top: 1px;
+  text-align: left;
+  margin: 15px;
+}
+
+.operation-def {
+  height: auto;
+}
+
+.input-data {
+  height: auto;
+}
+
+.output-data {
+  height: auto;
+}

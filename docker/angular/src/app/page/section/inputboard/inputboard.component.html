@@ -1,0 +1,48 @@
+<article class="input-data">
+	<h1>Input data</h1>
+  <form [formGroup] = "inputForm" (ngSubmit)="onSubmit()" class="text-left form-validate">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <input type="text" formControlName="firstnumber" 
+                 [ngClass]="{ 'is-invalid': submitted && f.firstnumber.errors }" class="form-control"/>
+          <div *ngIf="submitted && f.firstnumber.errors " class="invalid-feedback">
+            <div *ngIf="f.firstnumber.errors.required">Value required</div>
+            <div *ngIf="f.firstnumber.errors.pattern">Entered value not valid</div>
+          </div>
+        </div>
+        <div class="col-md-0.5">
+          <div class="col-0.5" [ngSwitch]="id">
+            <div *ngSwitchCase="100000"><i class="fas fa-plus"></i></div>
+            <div *ngSwitchCase="100001"><i class="fas fa-minus"></i></div>
+            <div *ngSwitchCase="100002"><i class="fas fa-times"></i></div>
+            <div *ngSwitchCase="100003"><i class="fas fa-divide"></i></div>
+            <div *ngSwitchCase="100004"><i class="fas fa-percent"></i></div>
+          </div>
+        </div>
+        <div class="col-2">
+          <input type="text" formControlName="secondnumber" 
+                [ngClass]="{ 'is-invalid': submitted && f.secondnumber.errors }" class="form-control"/>
+            <div *ngIf="submitted && f.secondnumber.errors " class="invalid-feedback">
+              <div *ngIf="f.secondnumber.errors.required">Value required</div>
+              <div *ngIf="f.secondnumber.errors.pattern">Entered value not valid</div>
+            </div>
+        </div>
+        <div class="col-md-auto">
+          <button class="btn btn-primary" type="submit" value="submit" >
+            <i class="fas fa-equals"></i>
+          </button>
+        </div>
+        <div class="col-md-auto">
+          <app-common-result [result] = "result"></app-common-result>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-3">
+          <button class="btn btn-primary" (click)="onResetClick()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</article>
