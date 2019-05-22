@@ -35,7 +35,7 @@ public class DescriptionServlet extends HttpServlet {
 	private static final Logger logger = LogManager.getLogger(DescriptionServlet.class.getName());
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Get DescriptionService
         DescriptionService descriptionService = new DescriptionService();
         try {
